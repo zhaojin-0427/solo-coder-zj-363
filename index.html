@@ -52,6 +52,18 @@
             justify-content: space-between;
         }
         
+        .display .memory-status {
+            font-size: 14px;
+            color: #28a745;
+            min-height: 20px;
+            text-align: left;
+            font-weight: 500;
+        }
+        
+        .display .memory-status.empty {
+            color: transparent;
+        }
+        
         .display .expression {
             font-size: 18px;
             color: #6c757d;
@@ -64,6 +76,25 @@
             font-weight: 600;
             color: #212529;
             word-break: break-all;
+        }
+        
+        .memory-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+        
+        .btn-memory {
+            padding: 12px 8px;
+            font-size: 14px;
+            background: #e9ecef;
+            color: #495057;
+            border: 1px solid #dee2e6;
+        }
+        
+        .btn-memory:hover {
+            background: #dee2e6;
         }
         
         .buttons {
@@ -291,8 +322,15 @@
     <div class="container">
         <div class="calculator">
             <div class="display">
+                <div class="memory-status" id="memoryStatus"></div>
                 <div class="expression" id="expression">0</div>
                 <div class="result" id="result">0</div>
+            </div>
+            <div class="memory-buttons">
+                <button class="btn btn-memory" id="mc">MC</button>
+                <button class="btn btn-memory" id="mr">MR</button>
+                <button class="btn btn-memory" id="mPlus">M+</button>
+                <button class="btn btn-memory" id="mMinus">M-</button>
             </div>
             <div class="buttons">
                 <button class="btn btn-clear" id="clear">C</button>
@@ -335,9 +373,14 @@
     <script>
         const expressionEl = document.getElementById('expression');
         const resultEl = document.getElementById('result');
+        const memoryStatusEl = document.getElementById('memoryStatus');
         const clearBtn = document.getElementById('clear');
         const dotBtn = document.getElementById('dot');
         const equalsBtn = document.getElementById('equals');
+        const mcBtn = document.getElementById('mc');
+        const mrBtn = document.getElementById('mr');
+        const mPlusBtn = document.getElementById('mPlus');
+        const mMinusBtn = document.getElementById('mMinus');
         const numBtns = document.querySelectorAll('.btn-num');
         const opBtns = document.querySelectorAll('.btn-op');
         const historyListEl = document.getElementById('historyList');
@@ -349,8 +392,10 @@
         let hasResult = false;
         let lastCalculation = '';
         let history = [];
+        let memory = 0;
         
         const STORAGE_KEY = 'calculator_history';
+        const MEMORY_KEY = 'calculator_memory';
 
         function loadHistory() {
             try {
@@ -362,6 +407,91 @@
                 history = [];
             }
             renderHistory();
+        }
+
+        function loadMemory() {
+            try {
+                const saved = localStorage.getItem(MEMORY_KEY);
+                if (saved !== null) {
+                    memory = parseFloat(saved);
+                    if (isNaN(memory)) {
+                        memory = 0;
+                    }
+                }
+            } catch (e) {
+                memory = 0;
+            }
+            updateMemoryStatus();
+        }
+
+        function saveMemory() {
+            try {
+                localStorage.setItem(MEMORY_KEY, memory.toString());
+            } catch (e) {
+                console.error('Failed to save memory');
+            }
+        }
+
+        function updateMemoryStatus() {
+            if (memory !== 0) {
+                memoryStatusEl.textContent = `M: ${memory}`;
+                memoryStatusEl.classList.remove('empty');
+            } else {
+                memoryStatusEl.textContent = '';
+                memoryStatusEl.classList.add('empty');
+            }
+        }
+
+        function isValidMemoryValue(value) {
+            if (value === 'Error' || value === '' || lastInputType === 'operator') {
+                return false;
+            }
+            const num = parseFloat(value);
+            return typeof num === 'number' && isFinite(num);
+        }
+
+        function memoryClear() {
+            memory = 0;
+            saveMemory();
+            updateMemoryStatus();
+        }
+
+        function memoryRecall() {
+            if (memory !== 0) {
+                const memoryStr = memory.toString();
+                if (lastInputType === 'operator') {
+                    expression += memoryStr;
+                    result = memoryStr;
+                    lastInputType = 'number';
+                } else if (lastInputType === 'equals' || lastInputType === 'error') {
+                    expression = memoryStr;
+                    result = memoryStr;
+                    lastInputType = 'number';
+                    hasResult = false;
+                } else {
+                    expression = memoryStr;
+                    result = memoryStr;
+                    lastInputType = 'number';
+                }
+                updateDisplay();
+                clearActiveOp();
+            }
+        }
+
+        function memoryAdd() {
+            if (isValidMemoryValue(result)) {
+                memory += parseFloat(result);
+                saveMemory();
+                updateMemoryStatus();
+            }
+        }
+
+        function memorySubtract() {
+            if (isValidMemoryValue(result)) {
+                memory -= parseFloat(result);
+                saveMemory();
+                updateMemoryStatus();
+            }
         }
 
         function saveHistory() {
@@ -577,6 +707,11 @@
         equalsBtn.addEventListener('click', calculate);
         clearBtn.addEventListener('click', clearAll);
         historyClearBtn.addEventListener('click', clearHistory);
+        
+        mcBtn.addEventListener('click', memoryClear);
+        mrBtn.addEventListener('click', memoryRecall);
+        mPlusBtn.addEventListener('click', memoryAdd);
+        mMinusBtn.addEventListener('click', memorySubtract);
 
         historyListEl.addEventListener('click', (e) => {
             const target = e.target;
@@ -609,6 +744,7 @@
         });
         
         loadHistory();
+        loadMemory();
         updateDisplay();
     </script>
 </body>
