@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>简易计算器</title>
+    <title>计算器</title>
     <style>
         * {
             margin: 0;
@@ -15,26 +15,36 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            max-width: 700px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
         
         .calculator {
             background: #ffffff;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            padding: 30px;
+            padding: 25px;
             width: 100%;
-            max-width: 380px;
+            max-width: 360px;
         }
         
         .display {
             background: #f8f9fa;
             border-radius: 12px;
             padding: 20px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             text-align: right;
             min-height: 80px;
             display: flex;
@@ -46,23 +56,25 @@
             font-size: 18px;
             color: #6c757d;
             min-height: 24px;
+            word-break: break-all;
         }
         
         .display .result {
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 600;
             color: #212529;
+            word-break: break-all;
         }
         
         .buttons {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
+            gap: 10px;
         }
         
         .btn {
-            padding: 20px;
-            font-size: 20px;
+            padding: 18px;
+            font-size: 18px;
             border: none;
             border-radius: 12px;
             cursor: pointer;
@@ -128,38 +140,195 @@
         .btn-dot:hover {
             background: #e0a800;
         }
+
+        .history-panel {
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            width: 100%;
+            max-width: 320px;
+            display: flex;
+            flex-direction: column;
+            max-height: calc(100vh - 120px);
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .history-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #212529;
+        }
+
+        .history-clear-btn {
+            background: none;
+            border: none;
+            color: #dc3545;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .history-clear-btn:hover {
+            background: #fff5f5;
+        }
+
+        .history-list {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-right: 5px;
+        }
+
+        .history-list::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .history-list::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 2px;
+        }
+
+        .history-list::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 2px;
+        }
+
+        .history-list::-webkit-scrollbar-thumb:hover {
+            background: #a1a1a1;
+        }
+
+        .history-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .history-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .history-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .history-expression {
+            font-size: 14px;
+            color: #6c757d;
+            word-break: break-all;
+            margin-bottom: 4px;
+        }
+
+        .history-result {
+            font-size: 18px;
+            font-weight: 600;
+            color: #218838;
+            word-break: break-all;
+        }
+
+        .history-delete-btn {
+            background: none;
+            border: none;
+            color: #adb5bd;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        .history-delete-btn:hover {
+            color: #dc3545;
+            background: #fff5f5;
+        }
+
+        .history-empty {
+            text-align: center;
+            color: #adb5bd;
+            font-size: 14px;
+            padding: 30px 0;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .calculator,
+            .history-panel {
+                max-width: 100%;
+            }
+            
+            .history-panel {
+                max-height: 400px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="calculator">
-        <div class="display">
-            <div class="expression" id="expression">0</div>
-            <div class="result" id="result">0</div>
+    <div class="container">
+        <div class="calculator">
+            <div class="display">
+                <div class="expression" id="expression">0</div>
+                <div class="result" id="result">0</div>
+            </div>
+            <div class="buttons">
+                <button class="btn btn-clear" id="clear">C</button>
+                <button class="btn btn-op" data-op="/">÷</button>
+                <button class="btn btn-op" data-op="*">×</button>
+                <button class="btn btn-op" data-op="-">−</button>
+                
+                <button class="btn btn-num" data-num="7">7</button>
+                <button class="btn btn-num" data-num="8">8</button>
+                <button class="btn btn-num" data-num="9">9</button>
+                <button class="btn btn-op" data-op="+">+</button>
+                
+                <button class="btn btn-num" data-num="4">4</button>
+                <button class="btn btn-num" data-num="5">5</button>
+                <button class="btn btn-num" data-num="6">6</button>
+                <button class="btn btn-op" data-op="-">−</button>
+                
+                <button class="btn btn-num" data-num="1">1</button>
+                <button class="btn btn-num" data-num="2">2</button>
+                <button class="btn btn-num" data-num="3">3</button>
+                <button class="btn btn-op" data-op="+">+</button>
+                
+                <button class="btn btn-num" data-num="0">0</button>
+                <button class="btn btn-dot" id="dot">.</button>
+                <button class="btn btn-equals" id="equals">=</button>
+            </div>
         </div>
-        <div class="buttons">
-            <button class="btn btn-clear" id="clear">C</button>
-            <button class="btn btn-op" data-op="/">÷</button>
-            <button class="btn btn-op" data-op="*">×</button>
-            <button class="btn btn-op" data-op="-">−</button>
-            
-            <button class="btn btn-num" data-num="7">7</button>
-            <button class="btn btn-num" data-num="8">8</button>
-            <button class="btn btn-num" data-num="9">9</button>
-            <button class="btn btn-op" data-op="+">+</button>
-            
-            <button class="btn btn-num" data-num="4">4</button>
-            <button class="btn btn-num" data-num="5">5</button>
-            <button class="btn btn-num" data-num="6">6</button>
-            <button class="btn btn-op" data-op="-">−</button>
-            
-            <button class="btn btn-num" data-num="1">1</button>
-            <button class="btn btn-num" data-num="2">2</button>
-            <button class="btn btn-num" data-num="3">3</button>
-            <button class="btn btn-op" data-op="+">+</button>
-            
-            <button class="btn btn-num" data-num="0">0</button>
-            <button class="btn btn-dot" id="dot">.</button>
-            <button class="btn btn-equals" id="equals">=</button>
+
+        <div class="history-panel">
+            <div class="history-header">
+                <span class="history-title">计算历史</span>
+                <button class="history-clear-btn" id="historyClear">清空全部</button>
+            </div>
+            <div class="history-list" id="historyList">
+                <div class="history-empty">暂无历史记录</div>
+            </div>
         </div>
     </div>
 
@@ -171,12 +340,89 @@
         const equalsBtn = document.getElementById('equals');
         const numBtns = document.querySelectorAll('.btn-num');
         const opBtns = document.querySelectorAll('.btn-op');
+        const historyListEl = document.getElementById('historyList');
+        const historyClearBtn = document.getElementById('historyClear');
         
         let expression = '';
         let result = '0';
         let lastInputType = '';
         let hasResult = false;
+        let lastCalculation = '';
+        let history = [];
         
+        const STORAGE_KEY = 'calculator_history';
+
+        function loadHistory() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    history = JSON.parse(saved);
+                }
+            } catch (e) {
+                history = [];
+            }
+            renderHistory();
+        }
+
+        function saveHistory() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+            } catch (e) {
+                console.error('Failed to save history');
+            }
+        }
+
+        function renderHistory() {
+            if (history.length === 0) {
+                historyListEl.innerHTML = '<div class="history-empty">暂无历史记录</div>';
+                return;
+            }
+            
+            historyListEl.innerHTML = history.map((item, index) => `
+                <div class="history-item" data-index="${index}">
+                    <div class="history-content">
+                        <div class="history-expression">${escapeHtml(item.expression)}</div>
+                        <div class="history-result">${escapeHtml(item.result)}</div>
+                    </div>
+                    <button class="history-delete-btn" data-index="${index}">×</button>
+                </div>
+            `).join('');
+        }
+
+        function addToHistory(exp, res) {
+            const newRecord = { expression: exp, result: res };
+            const recordString = `${exp}=${res}`;
+            
+            if (recordString === lastCalculation) {
+                return;
+            }
+            
+            history.unshift(newRecord);
+            history = history.slice(0, 50);
+            lastCalculation = recordString;
+            saveHistory();
+            renderHistory();
+        }
+
+        function removeFromHistory(index) {
+            history.splice(index, 1);
+            saveHistory();
+            renderHistory();
+        }
+
+        function clearHistory() {
+            history = [];
+            lastCalculation = '';
+            saveHistory();
+            renderHistory();
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
         function updateDisplay() {
             expressionEl.textContent = expression || '0';
             resultEl.textContent = result;
@@ -261,10 +507,14 @@
                 const calculated = eval(sanitized);
                 
                 if (typeof calculated === 'number' && isFinite(calculated)) {
+                    const originalExpression = expression;
                     result = calculated.toString();
                     if (result.includes('.') && result.split('.')[1].length > 10) {
                         result = calculated.toFixed(10);
                     }
+                    
+                    addToHistory(originalExpression, result);
+                    
                     hasResult = true;
                     lastInputType = 'equals';
                     updateDisplay();
@@ -305,6 +555,15 @@
         function clearActiveOp() {
             opBtns.forEach(btn => btn.classList.remove('active'));
         }
+
+        function useHistoryResult(resultValue) {
+            expression = resultValue;
+            result = resultValue;
+            lastInputType = 'number';
+            hasResult = false;
+            updateDisplay();
+            clearActiveOp();
+        }
         
         numBtns.forEach(btn => {
             btn.addEventListener('click', () => addNumber(btn.dataset.num));
@@ -317,6 +576,22 @@
         dotBtn.addEventListener('click', addDot);
         equalsBtn.addEventListener('click', calculate);
         clearBtn.addEventListener('click', clearAll);
+        historyClearBtn.addEventListener('click', clearHistory);
+
+        historyListEl.addEventListener('click', (e) => {
+            const target = e.target;
+            const itemEl = target.closest('.history-item');
+            
+            if (target.classList.contains('history-delete-btn')) {
+                e.stopPropagation();
+                const index = parseInt(target.dataset.index);
+                removeFromHistory(index);
+            } else if (itemEl) {
+                const index = parseInt(itemEl.dataset.index);
+                const item = history[index];
+                useHistoryResult(item.result);
+            }
+        });
         
         document.addEventListener('keydown', (e) => {
             if (e.key >= '0' && e.key <= '9') {
@@ -333,6 +608,7 @@
             }
         });
         
+        loadHistory();
         updateDisplay();
     </script>
 </body>
