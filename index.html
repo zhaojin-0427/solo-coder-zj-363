@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简易计算器</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .calculator {
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            width: 100%;
+            max-width: 380px;
+        }
+        
+        .display {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: right;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .display .expression {
+            font-size: 18px;
+            color: #6c757d;
+            min-height: 24px;
+        }
+        
+        .display .result {
+            font-size: 36px;
+            font-weight: 600;
+            color: #212529;
+        }
+        
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        
+        .btn {
+            padding: 20px;
+            font-size: 20px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-num {
+            background: #f8f9fa;
+            color: #212529;
+        }
+        
+        .btn-num:hover {
+            background: #e9ecef;
+        }
+        
+        .btn-op {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-op:hover {
+            background: #5a6fd6;
+        }
+        
+        .btn-op.active {
+            background: #764ba2;
+        }
+        
+        .btn-clear {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .btn-clear:hover {
+            background: #c82333;
+        }
+        
+        .btn-equals {
+            background: #28a745;
+            color: white;
+            grid-column: span 2;
+        }
+        
+        .btn-equals:hover {
+            background: #218838;
+        }
+        
+        .btn-dot {
+            background: #ffc107;
+            color: #212529;
+        }
+        
+        .btn-dot:hover {
+            background: #e0a800;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="display">
+            <div class="expression" id="expression">0</div>
+            <div class="result" id="result">0</div>
+        </div>
+        <div class="buttons">
+            <button class="btn btn-clear" id="clear">C</button>
+            <button class="btn btn-op" data-op="/">÷</button>
+            <button class="btn btn-op" data-op="*">×</button>
+            <button class="btn btn-op" data-op="-">−</button>
+            
+            <button class="btn btn-num" data-num="7">7</button>
+            <button class="btn btn-num" data-num="8">8</button>
+            <button class="btn btn-num" data-num="9">9</button>
+            <button class="btn btn-op" data-op="+">+</button>
+            
+            <button class="btn btn-num" data-num="4">4</button>
+            <button class="btn btn-num" data-num="5">5</button>
+            <button class="btn btn-num" data-num="6">6</button>
+            <button class="btn btn-op" data-op="-">−</button>
+            
+            <button class="btn btn-num" data-num="1">1</button>
+            <button class="btn btn-num" data-num="2">2</button>
+            <button class="btn btn-num" data-num="3">3</button>
+            <button class="btn btn-op" data-op="+">+</button>
+            
+            <button class="btn btn-num" data-num="0">0</button>
+            <button class="btn btn-dot" id="dot">.</button>
+            <button class="btn btn-equals" id="equals">=</button>
+        </div>
+    </div>
+
+    <script>
+        const expressionEl = document.getElementById('expression');
+        const resultEl = document.getElementById('result');
+        const clearBtn = document.getElementById('clear');
+        const dotBtn = document.getElementById('dot');
+        const equalsBtn = document.getElementById('equals');
+        const numBtns = document.querySelectorAll('.btn-num');
+        const opBtns = document.querySelectorAll('.btn-op');
+        
+        let expression = '';
+        let result = '0';
+        let lastInputType = '';
+        let hasResult = false;
+        
+        function updateDisplay() {
+            expressionEl.textContent = expression || '0';
+            resultEl.textContent = result;
+        }
+        
+        function addNumber(num) {
+            if (hasResult) {
+                expression = '';
+                result = '0';
+                hasResult = false;
+            }
+            
+            if (lastInputType === 'operator') {
+                expression += num;
+                result = num;
+            } else if (lastInputType === 'equals') {
+                expression = num;
+                result = num;
+            } else {
+                if (result === '0') {
+                    result = num;
+                } else {
+                    result += num;
+                }
+                expression += num;
+            }
+            
+            lastInputType = 'number';
+            updateDisplay();
+            clearActiveOp();
+        }
+        
+        function addOperator(op) {
+            if (lastInputType === 'number' || lastInputType === 'equals') {
+                expression += op;
+                lastInputType = 'operator';
+                updateDisplay();
+                setActiveOp(op);
+            } else if (lastInputType === 'operator') {
+                expression = expression.slice(0, -1) + op;
+                updateDisplay();
+                setActiveOp(op);
+            }
+        }
+        
+        function addDot() {
+            if (hasResult) {
+                expression = '';
+                result = '0';
+                hasResult = false;
+            }
+            
+            if (lastInputType === 'operator') {
+                expression += '0.';
+                result = '0.';
+            } else if (lastInputType === 'equals') {
+                expression = '0.';
+                result = '0.';
+            } else {
+                if (!result.includes('.')) {
+                    result += '.';
+                    expression += '.';
+                }
+            }
+            
+            lastInputType = 'number';
+            updateDisplay();
+            clearActiveOp();
+        }
+        
+        function calculate() {
+            if (!expression || lastInputType === 'operator') {
+                return;
+            }
+            
+            try {
+                const sanitized = expression
+                    .replace(/×/g, '*')
+                    .replace(/÷/g, '/')
+                    .replace(/−/g, '-');
+                
+                const calculated = eval(sanitized);
+                
+                if (typeof calculated === 'number' && isFinite(calculated)) {
+                    result = calculated.toString();
+                    if (result.includes('.') && result.split('.')[1].length > 10) {
+                        result = calculated.toFixed(10);
+                    }
+                    hasResult = true;
+                    lastInputType = 'equals';
+                    updateDisplay();
+                    clearActiveOp();
+                } else {
+                    result = 'Error';
+                    expression = '';
+                    lastInputType = 'error';
+                    updateDisplay();
+                }
+            } catch {
+                result = 'Error';
+                expression = '';
+                lastInputType = 'error';
+                updateDisplay();
+            }
+        }
+        
+        function clearAll() {
+            expression = '';
+            result = '0';
+            lastInputType = '';
+            hasResult = false;
+            updateDisplay();
+            clearActiveOp();
+        }
+        
+        function setActiveOp(op) {
+            opBtns.forEach(btn => {
+                if (btn.dataset.op === op) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+        
+        function clearActiveOp() {
+            opBtns.forEach(btn => btn.classList.remove('active'));
+        }
+        
+        numBtns.forEach(btn => {
+            btn.addEventListener('click', () => addNumber(btn.dataset.num));
+        });
+        
+        opBtns.forEach(btn => {
+            btn.addEventListener('click', () => addOperator(btn.dataset.op));
+        });
+        
+        dotBtn.addEventListener('click', addDot);
+        equalsBtn.addEventListener('click', calculate);
+        clearBtn.addEventListener('click', clearAll);
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key >= '0' && e.key <= '9') {
+                addNumber(e.key);
+            } else if (['+', '-', '*', '/'].includes(e.key)) {
+                const opMap = { '+': '+', '-': '−', '*': '×', '/': '÷' };
+                addOperator(opMap[e.key]);
+            } else if (e.key === '.') {
+                addDot();
+            } else if (e.key === '=' || e.key === 'Enter') {
+                calculate();
+            } else if (e.key === 'Escape' || e.key === 'c' || e.key === 'C') {
+                clearAll();
+            }
+        });
+        
+        updateDisplay();
+    </script>
+</body>
+</html>
