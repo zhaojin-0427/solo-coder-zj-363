@@ -599,6 +599,204 @@
             color: #dc3545;
         }
 
+        .settlement-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            padding: 15px;
+        }
+
+        .settlement-section .section-header {
+            border-bottom-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .settlement-section .section-header h3 {
+            color: white;
+        }
+
+        .advance-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .advance-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .advance-label {
+            color: white;
+            font-size: 14px;
+            min-width: 80px;
+            white-space: nowrap;
+        }
+
+        .advance-input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.9);
+            text-align: right;
+        }
+
+        .advance-input:focus {
+            outline: none;
+            border-color: #fff;
+        }
+
+        .transfer-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .transfer-item {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .transfer-info {
+            flex: 1;
+        }
+
+        .transfer-direction {
+            font-size: 15px;
+            font-weight: 600;
+            color: #212529;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .transfer-arrow {
+            color: #667eea;
+            font-size: 16px;
+        }
+
+        .transfer-amount {
+            font-size: 18px;
+            font-weight: 700;
+            color: #28a745;
+            margin-left: 15px;
+        }
+
+        .transfer-status {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 4px;
+        }
+
+        .transfer-status.settled {
+            color: #28a745;
+        }
+
+        .transfer-actions {
+            display: flex;
+            gap: 8px;
+            margin-left: 10px;
+        }
+
+        .btn-copy, .btn-back-calc {
+            padding: 6px 10px;
+            font-size: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-copy {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-copy:hover {
+            background: #5a6fd6;
+        }
+
+        .btn-back-calc {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-back-calc:hover {
+            background: #218838;
+        }
+
+        .btn-generate-transfer {
+            width: 100%;
+            padding: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.95);
+            color: #667eea;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 15px;
+        }
+
+        .btn-generate-transfer:hover {
+            background: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-copy-all {
+            background: rgba(255, 255, 255, 0.95);
+            color: #667eea;
+            border: none;
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-copy-all:hover {
+            background: white;
+        }
+
+        .net-balance {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .net-balance-name {
+            color: white;
+            font-size: 14px;
+        }
+
+        .net-balance-amount {
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .net-balance-amount.owe {
+            color: #ffc107;
+        }
+
+        .net-balance-amount.owed {
+            color: #28a745;
+        }
+
         .btn-transfer {
             background: #667eea;
             color: white;
@@ -673,6 +871,7 @@
                 flex-direction: column;
                 align-items: center;
                 gap: 15px;
+                padding-bottom: 20px;
             }
             
             .calculator-panel,
@@ -687,7 +886,7 @@
             }
             
             .history-panel {
-                max-height: 300px;
+                max-height: 250px;
             }
 
             .tabs-container {
@@ -709,19 +908,73 @@
                 flex: 1;
                 min-width: calc(50% - 4px);
             }
+
+            .transfer-item {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            .transfer-info {
+                width: 100%;
+            }
+
+            .transfer-direction {
+                flex-wrap: wrap;
+            }
+
+            .transfer-amount {
+                margin-left: auto;
+            }
+
+            .transfer-actions {
+                margin-left: 0;
+                width: 100%;
+                justify-content: flex-end;
+            }
         }
 
         @media (max-width: 400px) {
             .item-header {
                 flex-wrap: wrap;
+                gap: 8px;
             }
 
             .item-name {
-                width: calc(100% - 120px);
+                width: 100%;
             }
 
             .item-amount {
-                width: 80px;
+                width: calc(100% - 40px);
+                flex: 1;
+            }
+
+            .advance-item {
+                flex-wrap: wrap;
+            }
+
+            .advance-label {
+                min-width: auto;
+            }
+
+            .advance-input {
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .settlement-section {
+                padding: 12px;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .history-panel {
+                max-height: 200px;
+            }
+
+            .btn-copy, .btn-back-calc {
+                padding: 4px 8px;
+                font-size: 11px;
             }
         }
     </style>
@@ -827,6 +1080,23 @@
                         <div class="total-row">
                             <span class="total-label">应付总额</span>
                             <span class="total-value" id="totalAmount">0.00</span>
+                        </div>
+                    </div>
+
+                    <div class="split-section settlement-section">
+                        <div class="section-header">
+                            <h3>收款结算</h3>
+                            <button class="btn-copy-all" id="copyAllTransfer" style="display: none;">复制全部转账</button>
+                        </div>
+                        
+                        <div class="advance-input-group" id="advanceInputGroup">
+                            <div class="empty-hint" style="color: rgba(255,255,255,0.7);">请先添加参与人以录入垫付金额</div>
+                        </div>
+                        
+                        <button class="btn-generate-transfer" id="generateTransfer" style="display: none;">生成转账建议</button>
+                        
+                        <div class="transfer-list" id="transferList">
+                            <div class="empty-hint" style="color: rgba(255,255,255,0.7);">暂无转账建议</div>
                         </div>
                     </div>
                 </div>
@@ -1723,6 +1993,301 @@
                 transferToCalculator(btn.dataset.amount);
             }
         });
+
+        const advanceInputGroup = document.getElementById('advanceInputGroup');
+        const generateTransferBtn = document.getElementById('generateTransfer');
+        const transferList = document.getElementById('transferList');
+        const copyAllTransferBtn = document.getElementById('copyAllTransfer');
+
+        let advancePayments = {};
+        let transferSuggestions = [];
+
+        function validateAdvancePayment(name, value) {
+            if (!participants.includes(name)) {
+                return { valid: false, message: `垫付人 "${name}" 不存在` };
+            }
+            if (!value || value.trim() === '') {
+                return { valid: true, message: '', amount: 0 };
+            }
+            const num = parseFloat(value);
+            if (isNaN(num)) {
+                return { valid: false, message: '垫付金额必须是数字' };
+            }
+            if (num < 0) {
+                return { valid: false, message: '垫付金额不能为负数' };
+            }
+            return { valid: true, message: '', amount: num };
+        }
+
+        function validateSplitScheme() {
+            if (participants.length === 0) {
+                showToast('请先添加参与人', 'error');
+                return false;
+            }
+            if (items.length === 0) {
+                showToast('请先添加账单项目', 'error');
+                return false;
+            }
+            return validateItems();
+        }
+
+        function renderAdvanceInputs() {
+            if (participants.length === 0) {
+                advanceInputGroup.innerHTML = '<div class="empty-hint" style="color: rgba(255,255,255,0.7);">请先添加参与人以录入垫付金额</div>';
+                generateTransferBtn.style.display = 'none';
+                return;
+            }
+            
+            advanceInputGroup.innerHTML = participants.map(name => {
+                const amount = advancePayments[name] || '';
+                return `
+                    <div class="advance-item">
+                        <span class="advance-label">${name}:</span>
+                        <input type="number" class="advance-input" 
+                               data-participant="${name}" 
+                               value="${amount}" 
+                               placeholder="已垫付金额"
+                               step="0.01" min="0">
+                        <span style="color: white; font-size: 14px;">元</span>
+                    </div>
+                `;
+            }).join('');
+            
+            generateTransferBtn.style.display = 'block';
+        }
+
+        function updateAdvancePayment(name, value) {
+            const validation = validateAdvancePayment(name, value);
+            if (!validation.valid) {
+                showToast(validation.message, 'error');
+                return false;
+            }
+            advancePayments[name] = validation.amount;
+            return true;
+        }
+
+        function saveAdvancePayments() {
+            try {
+                const savedData = localStorage.getItem(SPLIT_STORAGE_KEY);
+                let data = savedData ? JSON.parse(savedData) : {};
+                data.advancePayments = advancePayments;
+                localStorage.setItem(SPLIT_STORAGE_KEY, JSON.stringify(data));
+            } catch (e) {
+                console.error('Failed to save advance payments');
+            }
+        }
+
+        function loadAdvancePayments() {
+            try {
+                const saved = localStorage.getItem(SPLIT_STORAGE_KEY);
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    advancePayments = data.advancePayments || {};
+                }
+            } catch (e) {
+                advancePayments = {};
+            }
+        }
+
+        function calculateNetBalances() {
+            const participantTotals = {};
+            participants.forEach(p => participantTotals[p] = 0);
+            
+            items.forEach(item => {
+                const amount = parseFloat(item.amount) || 0;
+                const splitCount = item.participants.length;
+                if (splitCount > 0) {
+                    const perPerson = amount / splitCount;
+                    item.participants.forEach(p => {
+                        participantTotals[p] += perPerson;
+                    });
+                }
+            });
+            
+            const sf = parseFloat(serviceFeeInput.value) || 0;
+            const disc = parseFloat(discountInput.value) || 0;
+            
+            const serviceFeePerPerson = participants.length > 0 ? sf / participants.length : 0;
+            const discountPerPerson = participants.length > 0 ? disc / participants.length : 0;
+            
+            const netBalances = {};
+            participants.forEach(p => {
+                const owed = participantTotals[p] + serviceFeePerPerson - discountPerPerson;
+                const paid = advancePayments[p] || 0;
+                netBalances[p] = owed - paid;
+            });
+            
+            return netBalances;
+        }
+
+        function generateTransferSuggestions() {
+            if (!validateSplitScheme()) return;
+
+            const netBalances = calculateNetBalances();
+            
+            const debtors = [];
+            const creditors = [];
+            
+            participants.forEach(p => {
+                const balance = netBalances[p];
+                if (balance > 0.0001) {
+                    debtors.push({ name: p, amount: balance });
+                } else if (balance < -0.0001) {
+                    creditors.push({ name: p, amount: -balance });
+                }
+            });
+            
+            debtors.sort((a, b) => b.amount - a.amount);
+            creditors.sort((a, b) => b.amount - a.amount);
+            
+            const suggestions = [];
+            let debtorIndex = 0;
+            let creditorIndex = 0;
+            
+            while (debtorIndex < debtors.length && creditorIndex < creditors.length) {
+                const debtor = debtors[debtorIndex];
+                const creditor = creditors[creditorIndex];
+                
+                const amount = Math.min(debtor.amount, creditor.amount);
+                
+                suggestions.push({
+                    from: debtor.name,
+                    to: creditor.name,
+                    amount: amount,
+                    settled: false
+                });
+                
+                debtor.amount -= amount;
+                creditor.amount -= amount;
+                
+                if (debtor.amount <= 0.0001) debtorIndex++;
+                if (creditor.amount <= 0.0001) creditorIndex++;
+            }
+            
+            transferSuggestions = suggestions;
+            renderTransferSuggestions();
+            
+            if (suggestions.length === 0) {
+                showToast('所有人账目已结清', 'success');
+            } else {
+                showToast(`已生成 ${suggestions.length} 条转账建议`, 'success');
+            }
+        }
+
+        function renderTransferSuggestions() {
+            copyAllTransferBtn.style.display = transferSuggestions.length > 0 ? 'block' : 'none';
+            
+            if (transferSuggestions.length === 0) {
+                transferList.innerHTML = '<div class="empty-hint" style="color: rgba(255,255,255,0.7);">暂无转账建议</div>';
+                return;
+            }
+            
+            transferList.innerHTML = transferSuggestions.map((transfer, index) => `
+                <div class="transfer-item" data-index="${index}">
+                    <div class="transfer-info">
+                        <div class="transfer-direction">
+                            <span>${transfer.from}</span>
+                            <span class="transfer-arrow">→</span>
+                            <span>${transfer.to}</span>
+                            <span class="transfer-amount">¥${transfer.amount.toFixed(2)}</span>
+                        </div>
+                        <div class="transfer-status ${transfer.settled ? 'settled' : ''}">
+                            ${transfer.settled ? '✓ 已结清' : '待转账'}
+                        </div>
+                    </div>
+                    <div class="transfer-actions">
+                        <button class="btn-copy" data-index="${index}" title="复制此条">复制</button>
+                        <button class="btn-back-calc" data-amount="${transfer.amount.toFixed(2)}" title="带回计算器">带回</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function copyTransferToClipboard(transfer) {
+            const text = `${transfer.from} → ${transfer.to}: ¥${transfer.amount.toFixed(2)}`;
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('已复制到剪贴板', 'success');
+            }).catch(() => {
+                showToast('复制失败，请手动复制', 'error');
+            });
+        }
+
+        function copyAllTransfersToClipboard() {
+            const text = transferSuggestions.map(t => `${t.from} → ${t.to}: ¥${t.amount.toFixed(2)}`).join('\n');
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('已复制全部转账', 'success');
+            }).catch(() => {
+                showToast('复制失败，请手动复制', 'error');
+            });
+        }
+
+        advanceInputGroup.addEventListener('input', (e) => {
+            const target = e.target;
+            if (target.classList.contains('advance-input')) {
+                const name = target.dataset.participant;
+                const value = target.value;
+                
+                const originalValue = advancePayments[name] || '';
+                if (updateAdvancePayment(name, value)) {
+                    saveAdvancePayments();
+                } else {
+                    target.value = originalValue;
+                }
+            }
+        });
+
+        generateTransferBtn.addEventListener('click', generateTransferSuggestions);
+
+        transferList.addEventListener('click', (e) => {
+            const copyBtn = e.target.closest('.btn-copy');
+            const backBtn = e.target.closest('.btn-back-calc');
+            
+            if (copyBtn) {
+                const index = parseInt(copyBtn.dataset.index);
+                copyTransferToClipboard(transferSuggestions[index]);
+            } else if (backBtn) {
+                const amount = backBtn.dataset.amount;
+                transferToCalculator(amount);
+            }
+        });
+
+        copyAllTransferBtn.addEventListener('click', copyAllTransfersToClipboard);
+
+        function onParticipantsChanged() {
+            const oldPayments = { ...advancePayments };
+            advancePayments = {};
+            participants.forEach(p => {
+                if (oldPayments[p] !== undefined) {
+                    advancePayments[p] = oldPayments[p];
+                }
+            });
+            renderAdvanceInputs();
+            saveAdvancePayments();
+        }
+
+        const originalAddParticipant = addParticipant;
+        addParticipant = function(name) {
+            originalAddParticipant(name);
+            onParticipantsChanged();
+        };
+
+        const originalRemoveParticipant = removeParticipant;
+        removeParticipant = function(name) {
+            originalRemoveParticipant(name);
+            onParticipantsChanged();
+        };
+
+        const originalClearSplit = clearSplit;
+        clearSplit = function() {
+            originalClearSplit();
+            advancePayments = {};
+            transferSuggestions = [];
+            renderAdvanceInputs();
+            renderTransferSuggestions();
+        };
+
+        loadAdvancePayments();
+        renderAdvanceInputs();
 
         loadSplitData();
     </script>
