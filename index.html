@@ -301,74 +301,549 @@
             padding: 30px 0;
         }
 
+        .tabs-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px;
+            border-radius: 12px;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 500;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: transparent;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .split-panel {
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 25px;
+            width: 100%;
+            max-width: 360px;
+        }
+
+        .split-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .split-section {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 15px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .section-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #212529;
+            margin: 0;
+        }
+
+        .add-input-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .add-input-group input {
+            padding: 6px 10px;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 14px;
+            min-width: 120px;
+        }
+
+        .btn-add {
+            padding: 6px 12px;
+            font-size: 14px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-add:hover {
+            background: #5a6fd6;
+        }
+
+        .participant-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .participant-tag {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 12px;
+            background: #e9ecef;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #495057;
+        }
+
+        .participant-tag.remove {
+            cursor: pointer;
+            padding-right: 6px;
+        }
+
+        .participant-tag.remove:hover {
+            background: #f8d7da;
+            color: #dc3545;
+        }
+
+        .participant-tag .remove-icon {
+            font-size: 12px;
+            padding: 2px;
+        }
+
+        .item-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .empty-hint {
+            text-align: center;
+            color: #adb5bd;
+            font-size: 14px;
+            padding: 20px 0;
+        }
+
+        .bill-item {
+            background: white;
+            border-radius: 10px;
+            padding: 12px;
+            border: 1px solid #e9ecef;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .item-name {
+            flex: 1;
+            padding: 5px 10px;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .item-amount {
+            width: 100px;
+            padding: 5px 10px;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 14px;
+            text-align: right;
+        }
+
+        .item-delete {
+            background: none;
+            border: none;
+            color: #adb5bd;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 4px;
+            margin-left: 8px;
+        }
+
+        .item-delete:hover {
+            color: #dc3545;
+        }
+
+        .participant-checkboxes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .participant-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 13px;
+            color: #495057;
+            cursor: pointer;
+            padding: 4px 8px;
+            background: #e9ecef;
+            border-radius: 15px;
+            transition: all 0.2s ease;
+        }
+
+        .participant-checkbox input {
+            display: none;
+        }
+
+        .participant-checkbox.selected {
+            background: #667eea;
+            color: white;
+        }
+
+        .adjustment-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .adjustment-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #495057;
+        }
+
+        .adjustment-group input {
+            flex: 1;
+            padding: 8px 10px;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 14px;
+            text-align: right;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-action {
+            padding: 6px 12px;
+            font-size: 13px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-clear-split {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-clear-split:hover {
+            background: #c82333;
+        }
+
+        .btn-export {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-export:hover {
+            background: #218838;
+        }
+
+        .result-summary {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .result-name {
+            font-size: 14px;
+            color: #495057;
+        }
+
+        .result-amount {
+            font-size: 16px;
+            font-weight: 600;
+            color: #218838;
+        }
+
+        .result-amount.negative {
+            color: #dc3545;
+        }
+
+        .btn-transfer {
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-transfer:hover {
+            background: #5a6fd6;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 2px solid #e9ecef;
+        }
+
+        .total-label {
+            font-size: 16px;
+            font-weight: 600;
+            color: #212529;
+        }
+
+        .total-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .error-border {
+            border-color: #dc3545 !important;
+            background: #fff5f5 !important;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast.error {
+            background: #dc3545;
+        }
+
+        .toast.success {
+            background: #28a745;
+        }
+
         @media (max-width: 700px) {
             .container {
                 flex-direction: column;
                 align-items: center;
+                gap: 15px;
             }
             
-            .calculator,
+            .calculator-panel,
+            .split-panel,
             .history-panel {
+                max-width: 100%;
+                width: 100%;
+            }
+            
+            .calculator {
                 max-width: 100%;
             }
             
             .history-panel {
-                max-height: 400px;
+                max-height: 300px;
+            }
+
+            .tabs-container {
+                width: 100%;
+                max-width: 360px;
+            }
+
+            .tab-btn {
+                flex: 1;
+                padding: 12px 8px;
+                font-size: 14px;
+            }
+
+            .action-buttons {
+                flex-wrap: wrap;
+            }
+
+            .btn-action {
+                flex: 1;
+                min-width: calc(50% - 4px);
+            }
+        }
+
+        @media (max-width: 400px) {
+            .item-header {
+                flex-wrap: wrap;
+            }
+
+            .item-name {
+                width: calc(100% - 120px);
+            }
+
+            .item-amount {
+                width: 80px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="calculator">
-            <div class="display">
-                <div class="memory-status" id="memoryStatus"></div>
-                <div class="expression" id="expression">0</div>
-                <div class="result" id="result">0</div>
+    <div class="tabs-container">
+            <button class="tab-btn active" id="calcTab">计算器</button>
+            <button class="tab-btn" id="splitTab">账单分摊</button>
+        </div>
+        
+        <div class="container">
+            <div class="calculator-panel" id="calcPanel">
+                <div class="calculator">
+                    <div class="display">
+                        <div class="memory-status" id="memoryStatus"></div>
+                        <div class="expression" id="expression">0</div>
+                        <div class="result" id="result">0</div>
+                    </div>
+                    <div class="memory-buttons">
+                        <button class="btn btn-memory" id="mc">MC</button>
+                        <button class="btn btn-memory" id="mr">MR</button>
+                        <button class="btn btn-memory" id="mPlus">M+</button>
+                        <button class="btn btn-memory" id="mMinus">M-</button>
+                    </div>
+                    <div class="buttons">
+                        <button class="btn btn-clear" id="clear">C</button>
+                        <button class="btn btn-op" data-op="/">÷</button>
+                        <button class="btn btn-op" data-op="*">×</button>
+                        <button class="btn btn-op" data-op="-">−</button>
+                        
+                        <button class="btn btn-num" data-num="7">7</button>
+                        <button class="btn btn-num" data-num="8">8</button>
+                        <button class="btn btn-num" data-num="9">9</button>
+                        <button class="btn btn-op" data-op="+">+</button>
+                        
+                        <button class="btn btn-num" data-num="4">4</button>
+                        <button class="btn btn-num" data-num="5">5</button>
+                        <button class="btn btn-num" data-num="6">6</button>
+                        <button class="btn btn-op" data-op="-">−</button>
+                        
+                        <button class="btn btn-num" data-num="1">1</button>
+                        <button class="btn btn-num" data-num="2">2</button>
+                        <button class="btn btn-num" data-num="3">3</button>
+                        <button class="btn btn-op" data-op="+">+</button>
+                        
+                        <button class="btn btn-num" data-num="0">0</button>
+                        <button class="btn btn-dot" id="dot">.</button>
+                        <button class="btn btn-equals" id="equals">=</button>
+                    </div>
+                </div>
             </div>
-            <div class="memory-buttons">
-                <button class="btn btn-memory" id="mc">MC</button>
-                <button class="btn btn-memory" id="mr">MR</button>
-                <button class="btn btn-memory" id="mPlus">M+</button>
-                <button class="btn btn-memory" id="mMinus">M-</button>
+
+            <div class="split-panel" id="splitPanel" style="display: none;">
+                <div class="split-container">
+                    <div class="split-section">
+                        <div class="section-header">
+                            <h3>参与人</h3>
+                            <div class="add-input-group">
+                                <input type="text" id="participantInput" placeholder="输入参与人姓名">
+                                <button class="btn-add" id="addParticipant">添加</button>
+                            </div>
+                        </div>
+                        <div class="participant-list" id="participantList"></div>
+                    </div>
+
+                    <div class="split-section">
+                        <div class="section-header">
+                            <h3>账单项目</h3>
+                            <button class="btn-add" id="addItem">+ 添加项目</button>
+                        </div>
+                        <div class="item-list" id="itemList">
+                            <div class="empty-hint">暂无项目，请添加</div>
+                        </div>
+                    </div>
+
+                    <div class="split-section">
+                        <div class="section-header">
+                            <h3>费用调整</h3>
+                        </div>
+                        <div class="adjustment-group">
+                            <label>
+                                <span>服务费</span>
+                                <input type="number" id="serviceFee" placeholder="0" step="0.01" min="0">
+                                <span>元</span>
+                            </label>
+                            <label>
+                                <span>折扣</span>
+                                <input type="number" id="discount" placeholder="0" step="0.01" min="0">
+                                <span>元</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="split-section">
+                        <div class="section-header">
+                            <h3>分摊结果</h3>
+                            <div class="action-buttons">
+                                <button class="btn-action btn-clear-split" id="clearSplit">清空方案</button>
+                                <button class="btn-action btn-export" id="exportSplit">导出摘要</button>
+                            </div>
+                        </div>
+                        <div class="result-summary" id="resultSummary"></div>
+                        <div class="total-row">
+                            <span class="total-label">应付总额</span>
+                            <span class="total-value" id="totalAmount">0.00</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="buttons">
-                <button class="btn btn-clear" id="clear">C</button>
-                <button class="btn btn-op" data-op="/">÷</button>
-                <button class="btn btn-op" data-op="*">×</button>
-                <button class="btn btn-op" data-op="-">−</button>
-                
-                <button class="btn btn-num" data-num="7">7</button>
-                <button class="btn btn-num" data-num="8">8</button>
-                <button class="btn btn-num" data-num="9">9</button>
-                <button class="btn btn-op" data-op="+">+</button>
-                
-                <button class="btn btn-num" data-num="4">4</button>
-                <button class="btn btn-num" data-num="5">5</button>
-                <button class="btn btn-num" data-num="6">6</button>
-                <button class="btn btn-op" data-op="-">−</button>
-                
-                <button class="btn btn-num" data-num="1">1</button>
-                <button class="btn btn-num" data-num="2">2</button>
-                <button class="btn btn-num" data-num="3">3</button>
-                <button class="btn btn-op" data-op="+">+</button>
-                
-                <button class="btn btn-num" data-num="0">0</button>
-                <button class="btn btn-dot" id="dot">.</button>
-                <button class="btn btn-equals" id="equals">=</button>
+
+            <div class="history-panel">
+                <div class="history-header">
+                    <span class="history-title">计算历史</span>
+                    <button class="history-clear-btn" id="historyClear">清空全部</button>
+                </div>
+                <div class="history-list" id="historyList">
+                    <div class="history-empty">暂无历史记录</div>
+                </div>
             </div>
         </div>
 
-        <div class="history-panel">
-            <div class="history-header">
-                <span class="history-title">计算历史</span>
-                <button class="history-clear-btn" id="historyClear">清空全部</button>
-            </div>
-            <div class="history-list" id="historyList">
-                <div class="history-empty">暂无历史记录</div>
-            </div>
-        </div>
-    </div>
+        <div class="toast" id="toast"></div>
 
     <script>
         const expressionEl = document.getElementById('expression');
@@ -746,6 +1221,510 @@
         loadHistory();
         loadMemory();
         updateDisplay();
+    </script>
+
+    <script>
+        const calcTab = document.getElementById('calcTab');
+        const splitTab = document.getElementById('splitTab');
+        const calcPanel = document.getElementById('calcPanel');
+        const splitPanel = document.getElementById('splitPanel');
+        const participantInput = document.getElementById('participantInput');
+        const addParticipantBtn = document.getElementById('addParticipant');
+        const participantList = document.getElementById('participantList');
+        const addItemBtn = document.getElementById('addItem');
+        const itemList = document.getElementById('itemList');
+        const serviceFeeInput = document.getElementById('serviceFee');
+        const discountInput = document.getElementById('discount');
+        const resultSummary = document.getElementById('resultSummary');
+        const totalAmount = document.getElementById('totalAmount');
+        const clearSplitBtn = document.getElementById('clearSplit');
+        const exportSplitBtn = document.getElementById('exportSplit');
+        const toast = document.getElementById('toast');
+
+        let participants = [];
+        let items = [];
+        let serviceFee = 0;
+        let discount = 0;
+
+        const SPLIT_STORAGE_KEY = 'split_bill_data';
+
+        function showToast(message, type = 'info') {
+            toast.textContent = message;
+            toast.className = `toast show ${type}`;
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        function validateAmount(value) {
+            if (!value || value.trim() === '') {
+                return { valid: false, message: '金额不能为空' };
+            }
+            const num = parseFloat(value);
+            if (isNaN(num)) {
+                return { valid: false, message: '金额必须是数字' };
+            }
+            if (num < 0) {
+                return { valid: false, message: '金额不能为负数' };
+            }
+            return { valid: true, message: '' };
+        }
+
+        function validateParticipants() {
+            if (participants.length === 0) {
+                showToast('请先添加参与人', 'error');
+                return false;
+            }
+            return true;
+        }
+
+        function validateItems() {
+            for (let i = 0; i < items.length; i++) {
+                const item = items[i];
+                const amountValid = validateAmount(item.amount);
+                if (!amountValid.valid) {
+                    showToast(`项目 "${item.name || '未命名'}" ${amountValid.message}`, 'error');
+                    return false;
+                }
+                if (item.amount <= 0) {
+                    showToast(`项目 "${item.name || '未命名'}" 金额必须大于0`, 'error');
+                    return false;
+                }
+                if (item.participants.length === 0) {
+                    showToast(`项目 "${item.name || '未命名'}" 必须选择至少一个参与人`, 'error');
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function validateDiscount() {
+            const total = calculateSubtotal();
+            const disc = parseFloat(discountInput.value) || 0;
+            if (disc > total) {
+                showToast('折扣不能大于应付总额', 'error');
+                return false;
+            }
+            return true;
+        }
+
+        function loadSplitData() {
+            try {
+                const saved = localStorage.getItem(SPLIT_STORAGE_KEY);
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    participants = data.participants || [];
+                    items = data.items || [];
+                    serviceFee = parseFloat(data.serviceFee) || 0;
+                    discount = parseFloat(data.discount) || 0;
+                    serviceFeeInput.value = serviceFee.toString();
+                    discountInput.value = discount.toString();
+                }
+            } catch (e) {
+                participants = [];
+                items = [];
+                serviceFee = 0;
+                discount = 0;
+            }
+            renderParticipants();
+            renderItems();
+            calculateAndDisplay();
+        }
+
+        function saveSplitData() {
+            try {
+                const data = {
+                    participants,
+                    items,
+                    serviceFee,
+                    discount
+                };
+                localStorage.setItem(SPLIT_STORAGE_KEY, JSON.stringify(data));
+            } catch (e) {
+                console.error('Failed to save split data');
+            }
+        }
+
+        function addParticipant(name) {
+            name = name.trim();
+            if (!name) {
+                showToast('请输入参与人姓名', 'error');
+                return;
+            }
+            if (participants.includes(name)) {
+                showToast('参与人已存在', 'error');
+                return;
+            }
+            participants.push(name);
+            participantInput.value = '';
+            renderParticipants();
+            updateItemCheckboxes();
+            saveSplitData();
+            showToast(`已添加参与人: ${name}`, 'success');
+        }
+
+        function removeParticipant(name) {
+            participants = participants.filter(p => p !== name);
+            items.forEach(item => {
+                item.participants = item.participants.filter(p => p !== name);
+            });
+            renderParticipants();
+            updateItemCheckboxes();
+            calculateAndDisplay();
+            saveSplitData();
+            showToast(`已移除参与人: ${name}`, 'info');
+        }
+
+        function renderParticipants() {
+            if (participants.length === 0) {
+                participantList.innerHTML = '<div class="empty-hint">暂无参与人</div>';
+                return;
+            }
+            participantList.innerHTML = participants.map(name => `
+                <div class="participant-tag remove" data-name="${name}">
+                    <span>${name}</span>
+                    <span class="remove-icon">×</span>
+                </div>
+            `).join('');
+        }
+
+        function addItem() {
+            if (!validateParticipants()) return;
+            const newItem = {
+                id: Date.now(),
+                name: '',
+                amount: '',
+                participants: [...participants]
+            };
+            items.push(newItem);
+            renderItems();
+            saveSplitData();
+        }
+
+        function removeItem(id) {
+            items = items.filter(item => item.id !== id);
+            renderItems();
+            calculateAndDisplay();
+            saveSplitData();
+        }
+
+        function updateItemName(id, name) {
+            const item = items.find(i => i.id === id);
+            if (item) {
+                item.name = name;
+                saveSplitData();
+            }
+        }
+
+        function updateItemAmount(id, amount) {
+            const item = items.find(i => i.id === id);
+            if (item) {
+                item.amount = amount;
+                calculateAndDisplay();
+                saveSplitData();
+            }
+        }
+
+        function toggleItemParticipant(itemId, participantName) {
+            const item = items.find(i => i.id === itemId);
+            if (item) {
+                const index = item.participants.indexOf(participantName);
+                if (index > -1) {
+                    if (item.participants.length > 1) {
+                        item.participants.splice(index, 1);
+                    } else {
+                        showToast('每个项目至少需要一个参与人', 'error');
+                        return;
+                    }
+                } else {
+                    item.participants.push(participantName);
+                }
+                renderItems();
+                calculateAndDisplay();
+                saveSplitData();
+            }
+        }
+
+        function renderItems() {
+            if (items.length === 0) {
+                itemList.innerHTML = '<div class="empty-hint">暂无项目，请添加</div>';
+                return;
+            }
+            itemList.innerHTML = items.map(item => {
+                const checkboxes = participants.map(p => `
+                    <label class="participant-checkbox ${item.participants.includes(p) ? 'selected' : ''}" 
+                           data-item-id="${item.id}" data-participant="${p}">
+                        <input type="checkbox" ${item.participants.includes(p) ? 'checked' : ''}>
+                        <span>${p}</span>
+                    </label>
+                `).join('');
+                return `
+                    <div class="bill-item" data-item-id="${item.id}">
+                        <div class="item-header">
+                            <input type="text" class="item-name" placeholder="项目名称" 
+                                   value="${item.name}" data-item-id="${item.id}">
+                            <input type="number" class="item-amount" placeholder="金额" 
+                                   value="${item.amount}" data-item-id="${item.id}" step="0.01" min="0">
+                            <button class="item-delete" data-item-id="${item.id}">×</button>
+                        </div>
+                        <div class="participant-checkboxes">
+                            ${checkboxes}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateItemCheckboxes() {
+            items.forEach(item => {
+                item.participants = item.participants.filter(p => participants.includes(p));
+            });
+            renderItems();
+            calculateAndDisplay();
+        }
+
+        function calculateSubtotal() {
+            return items.reduce((sum, item) => {
+                const amount = parseFloat(item.amount) || 0;
+                return sum + amount;
+            }, 0);
+        }
+
+        function calculateAndDisplay() {
+            if (!validateItems()) return;
+            
+            const subtotal = calculateSubtotal();
+            const sf = parseFloat(serviceFeeInput.value) || 0;
+            const disc = parseFloat(discountInput.value) || 0;
+            
+            if (disc > subtotal + sf) {
+                showToast('折扣不能大于应付总额', 'error');
+                return;
+            }
+            
+            serviceFee = sf;
+            discount = disc;
+            
+            const participantTotals = {};
+            participants.forEach(p => participantTotals[p] = 0);
+            
+            items.forEach(item => {
+                const amount = parseFloat(item.amount) || 0;
+                const splitCount = item.participants.length;
+                if (splitCount > 0) {
+                    const perPerson = amount / splitCount;
+                    item.participants.forEach(p => {
+                        participantTotals[p] += perPerson;
+                    });
+                }
+            });
+            
+            const serviceFeePerPerson = participants.length > 0 ? sf / participants.length : 0;
+            participants.forEach(p => {
+                participantTotals[p] += serviceFeePerPerson;
+            });
+            
+            const discountPerPerson = participants.length > 0 ? disc / participants.length : 0;
+            participants.forEach(p => {
+                participantTotals[p] -= discountPerPerson;
+            });
+            
+            let total = 0;
+            const resultHtml = participants.map(p => {
+                const amount = participantTotals[p];
+                total += amount;
+                return `
+                    <div class="result-item">
+                        <span class="result-name">${p}</span>
+                        <div>
+                            <span class="result-amount ${amount < 0 ? 'negative' : ''}">¥${amount.toFixed(2)}</span>
+                            <button class="btn-transfer" data-amount="${amount.toFixed(2)}">带回计算器</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            resultSummary.innerHTML = resultHtml;
+            totalAmount.textContent = `¥${total.toFixed(2)}`;
+            
+            saveSplitData();
+        }
+
+        function clearSplit() {
+            participants = [];
+            items = [];
+            serviceFee = 0;
+            discount = 0;
+            serviceFeeInput.value = '';
+            discountInput.value = '';
+            renderParticipants();
+            renderItems();
+            resultSummary.innerHTML = '';
+            totalAmount.textContent = '0.00';
+            localStorage.removeItem(SPLIT_STORAGE_KEY);
+            showToast('已清空分摊方案', 'info');
+        }
+
+        function exportSplit() {
+            if (participants.length === 0 || items.length === 0) {
+                showToast('没有可导出的分摊方案', 'error');
+                return;
+            }
+            
+            if (!validateItems()) return;
+            
+            let text = '=== 账单分摊方案 ===\n\n';
+            text += `参与人: ${participants.join('、')}\n\n`;
+            text += '【账单项目】\n';
+            items.forEach((item, index) => {
+                text += `${index + 1}. ${item.name || '未命名项目'}: ¥${parseFloat(item.amount).toFixed(2)}\n`;
+                text += `   承担人: ${item.participants.join('、')}\n`;
+            });
+            
+            if (serviceFee > 0) {
+                text += `\n服务费: ¥${serviceFee.toFixed(2)}\n`;
+            }
+            if (discount > 0) {
+                text += `折扣: ¥${discount.toFixed(2)}\n`;
+            }
+            
+            const subtotal = calculateSubtotal();
+            text += `\n【分摊结果】\n`;
+            
+            const participantTotals = {};
+            participants.forEach(p => participantTotals[p] = 0);
+            
+            items.forEach(item => {
+                const amount = parseFloat(item.amount) || 0;
+                const splitCount = item.participants.length;
+                if (splitCount > 0) {
+                    const perPerson = amount / splitCount;
+                    item.participants.forEach(p => {
+                        participantTotals[p] += perPerson;
+                    });
+                }
+            });
+            
+            const serviceFeePerPerson = participants.length > 0 ? serviceFee / participants.length : 0;
+            const discountPerPerson = participants.length > 0 ? discount / participants.length : 0;
+            
+            let total = 0;
+            participants.forEach(p => {
+                const amount = participantTotals[p] + serviceFeePerPerson - discountPerPerson;
+                total += amount;
+                text += `${p}: ¥${amount.toFixed(2)}\n`;
+            });
+            
+            text += `\n应付总额: ¥${total.toFixed(2)}`;
+            
+            const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `账单分摊_${new Date().toLocaleDateString()}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showToast('导出成功', 'success');
+        }
+
+        function transferToCalculator(amount) {
+            expression = amount;
+            result = amount;
+            lastInputType = 'number';
+            hasResult = false;
+            updateDisplay();
+            clearActiveOp();
+            
+            calcTab.classList.add('active');
+            splitTab.classList.remove('active');
+            calcPanel.style.display = 'block';
+            splitPanel.style.display = 'none';
+            
+            showToast('已将金额带回计算器', 'success');
+        }
+
+        calcTab.addEventListener('click', () => {
+            calcTab.classList.add('active');
+            splitTab.classList.remove('active');
+            calcPanel.style.display = 'block';
+            splitPanel.style.display = 'none';
+        });
+
+        splitTab.addEventListener('click', () => {
+            splitTab.classList.add('active');
+            calcTab.classList.remove('active');
+            calcPanel.style.display = 'none';
+            splitPanel.style.display = 'block';
+        });
+
+        addParticipantBtn.addEventListener('click', () => {
+            addParticipant(participantInput.value);
+        });
+
+        participantInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                addParticipant(participantInput.value);
+            }
+        });
+
+        participantList.addEventListener('click', (e) => {
+            const target = e.target.closest('.participant-tag.remove');
+            if (target) {
+                const name = target.dataset.name;
+                removeParticipant(name);
+            }
+        });
+
+        addItemBtn.addEventListener('click', addItem);
+
+        itemList.addEventListener('click', (e) => {
+            const deleteBtn = e.target.closest('.item-delete');
+            const checkbox = e.target.closest('.participant-checkbox');
+            
+            if (deleteBtn) {
+                const id = parseInt(deleteBtn.dataset.itemId);
+                removeItem(id);
+            } else if (checkbox) {
+                const itemId = parseInt(checkbox.dataset.itemId);
+                const participant = checkbox.dataset.participant;
+                toggleItemParticipant(itemId, participant);
+            }
+        });
+
+        itemList.addEventListener('input', (e) => {
+            const target = e.target;
+            if (target.classList.contains('item-name')) {
+                const id = parseInt(target.dataset.itemId);
+                updateItemName(id, target.value);
+            } else if (target.classList.contains('item-amount')) {
+                const id = parseInt(target.dataset.itemId);
+                updateItemAmount(id, target.value);
+            }
+        });
+
+        serviceFeeInput.addEventListener('input', () => {
+            calculateAndDisplay();
+        });
+
+        discountInput.addEventListener('input', () => {
+            calculateAndDisplay();
+        });
+
+        clearSplitBtn.addEventListener('click', clearSplit);
+
+        exportSplitBtn.addEventListener('click', exportSplit);
+
+        resultSummary.addEventListener('click', (e) => {
+            const btn = e.target.closest('.btn-transfer');
+            if (btn) {
+                transferToCalculator(btn.dataset.amount);
+            }
+        });
+
+        loadSplitData();
     </script>
 </body>
 </html>
